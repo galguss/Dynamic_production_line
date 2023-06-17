@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../styles/style.css" rel="stylesheet" />
+    <title>Dynamic production line</title>
+</head>
+<body>
+    <%- include('Header') %>
+    <main class="container">
+        <form class="response" action="" method="POST" type="submit">
+            <h2>טופס להגדרת זמנים בשניות</h2>
+            <p>זמן מינימלי 2 שניות לכל תהליך</p>
+            <label for="Name_Machine" >שם מכונה</label>
+            <input value="<%= item.Name_Machine %>" class="input_form" type="text" name="Name_Machine" required/>
+            <label for="Heating" >הגדרת זמן חימום</label>
+            <input value="<%= item.Heating %>" class="input_form" type="number" name="Heating" min="2" required/>
+            <label for="Light_level" >הגדרת זמן מדידת עוצמת אור</label>
+            <input value="<%= item.Light_level %>" class="input_form" type="number" min="2" name="Light_level" required/>
+            <label for="component_activation" >הגדרת זמן תהליך</label>
+            <input value="<%= item.component_activation %>" class="input_form" type="number" name="component_activation" min="2" required/>
+            <label for="delay_time" >הגדרת זמן השהייה</label>
+            <input value="<%= item.delay_time %>" class="input_form" type="number" name="delay_time" min="2" required/>
+            <label>מצב המכונה</label>
+            <input value="<%= (item.ProcessInAction) ? "בפעולה" : "כבוי" %>" class="input_form" type="text" readonly/>
+            <button class="btn_input">שלח</button>
+        </form>
+    </main>
+    <%- include('Footer') %>
+</body>
+</html>

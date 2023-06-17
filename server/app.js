@@ -31,3 +31,10 @@ database.on('error', (error) => {
 database.once('connected', () => {
     console.log(`Now listening on port ${port}`);
 });
+
+app.get('/', (req, res) => {
+    res.render('Index');
+});
+
+const Web = require('./routes/process_R');
+app.use('/Web', Web);

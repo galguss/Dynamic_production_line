@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../styles/style.css" rel="stylesheet" />
+    <title>Dynamic production line</title>
+</head>
+<body>
+    <%- include('Header') %>
+    <main class="container">
+        <table>
+            <thead>
+                <tr>
+                    <td colspan="100" class="right">
+                        <form action="/Web/Add" method="get">
+                            <button class="btn">הוספה +</button>
+                        </form>
+                    </td>
+                </tr>    
+                <tr>
+                    <th></th>
+                    <th>שם מכונה</th>
+                    <th>זמן חימום</th>
+                    <th>זמן מדידת אור</th>
+                    <th>זמן תהליך</th>
+                    <th>זמן השהייה</th>
+                    <th>מצב מכונה</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let item of data) {%>
+                    <tr>
+                        <td>
+                            <form action="/Web/Edit" method="get">
+                                <input type="hidden" name="id" value="<%= item._id %>">
+                                <button class="btn">ערוך</button>
+                            </form>
+                        </td>
+                        <td><%= item.Name_Machine %></td>
+                        <td><%= item.Heating %></td>
+                        <td><%= item.Light_level %></td>
+                        <td><%= item.component_activation %></td>
+                        <td><%= item.delay_time %></td>
+                        <td><%= (item.ProcessInAction) ? "בפעולה" : "כבוי" %></td>
+                        <td>
+                            <form action="/Web/Edit/Off" method="post" 
+                                onsubmit="return confirm('נא לאשר כיבוי'); return false;">
+                                <input type="hidden" name="id" value="<%= item._id %>">
+                                <button class="btn">כיבוי</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/Web/Delete" method="post" 
+                                onsubmit="return confirm('נא לאשר מחיקה'); return false;">
+                                <input type="hidden" name="id" value="<%= item._id %>">
+                                <button class="btn">מחיקה</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>   
+            </tbody>
+        </table>
+    </main>
+    <%- include('Footer') %>
+</body>
+</html>
