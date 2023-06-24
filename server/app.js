@@ -38,3 +38,6 @@ app.get('/', (req, res) => {
 
 const Web = require('./routes/process_R');
 app.use('/Web', Web);
+
+const Arduino = require('./routes/arduino');
+app.use('/Arduino', Arduino);
