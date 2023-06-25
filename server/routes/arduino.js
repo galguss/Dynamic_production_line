@@ -17,9 +17,10 @@ Router.get('/', HandleGetID(TimeDB), async (req, res) => {
     } 
 });
 
-Router.get('/Creature/:process/:ID', async (req, res) => {
+Router.get('/:process/:ID', async (req, res) => {
     try {
-        const item = await TimeDB.find({_id: req.params.ID});
+        const ID = req.params.ID.substring(1, req.params.ID.length -1);
+        const item = await TimeDB.find({_id: ID});
         res.send( item[0][req.params.process].toString());
     } catch (error) {
         console.log(error);
