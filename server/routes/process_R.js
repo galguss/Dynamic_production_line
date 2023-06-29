@@ -8,8 +8,9 @@ Router.get('/Add', (req, res) => {
 });
 
 Router.post('/Add', (req, res) => {
-    const { Name_Machine, Heating, Light_level, component_activation, delay_time } = req.body;
-    const modelData = new TimeDB({
+    try {
+        const { Name_Machine, Heating, Light_level, component_activation, delay_time } = req.body;
+        const modelData = new TimeDB({
         Name_Machine: Name_Machine,
         Heating: Heating,
         Light_level: Light_level,
@@ -17,8 +18,12 @@ Router.post('/Add', (req, res) => {
         delay_time: delay_time,
         ProcessInAction: false
     });
-    modelData.save();
-    res.redirect('/Web/List');
+        modelData.save();
+        res.redirect('/Web/List');
+    } catch (error) {
+        console.log(error);
+        res.send("ערך הזמן המינימלי הוא 2 שניות");
+    }    
 });
 
 Router.get('/List', async (req, res) => {
